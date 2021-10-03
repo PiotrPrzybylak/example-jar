@@ -1,6 +1,8 @@
-package com.motorola.animal;
+package com.motorola.thread;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,14 +10,14 @@ class MultiThreadedCounterTest {
 
     @Test
     public void shouldBeZeroOnCreation(){
-        MultiThreadedCounter sut = new MultiThreadedCounter();
+        MultiThreadedCounter sut = new MultiThreadedCounter(r -> r.run());
 
         assertEquals(0, sut.getCounter());
     }
 
     @Test
     public void shouldBe1000AfterOnePassOfCounting(){
-        MultiThreadedCounter sut = new MultiThreadedCounter();
+        MultiThreadedCounter sut = new MultiThreadedCounter(r -> r.run());
 
         sut.countTo1000();
 

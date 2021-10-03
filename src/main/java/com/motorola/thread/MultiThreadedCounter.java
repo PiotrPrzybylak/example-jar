@@ -1,12 +1,17 @@
-package com.motorola.animal;
+package com.motorola.thread;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MultiThreadedCounter {
 
     private volatile long counter;
+    private final Executor executor;
+
+    public MultiThreadedCounter(Executor executor) {
+        this.executor = executor;
+    }
 
     public void countTo1000() {
 
@@ -18,15 +23,9 @@ public class MultiThreadedCounter {
             }
         };
 
-        ExecutorService executor = Executors.newFixedThreadPool(1);
-        executor.submit(countTo500);
-        executor.submit(countTo500);
-        try {
-            executor.awaitTermination(1000, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        executor.shutdown();
+        executor.execute(countTo500);
+        executor.execute(countTo500);
+
      }
 
     public long getCounter() {
