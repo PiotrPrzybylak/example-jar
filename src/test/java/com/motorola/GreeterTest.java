@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GreeterTest {
 
@@ -68,6 +69,7 @@ class GreeterTest {
 
     @Test
     public void throwsIllegalArgumentException() {
-//        assertThrows(IllegalArgumentException.class, () -> greeter.welcomeGuest(null));
+        Greeter greeter = new TimeGreeter(() -> null);
+        assertThrows(IllegalArgumentException.class, () -> greeter.welcomeGuest());
     }
 }
