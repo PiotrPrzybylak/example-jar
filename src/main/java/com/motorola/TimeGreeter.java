@@ -8,8 +8,8 @@ public class TimeGreeter implements Greeter {
 
     private final Supplier<LocalTime> localTime;
 
-    public TimeGreeter(Supplier<LocalTime> function) {
-        this.localTime = function;
+    public TimeGreeter(Supplier<LocalTime> localTime) {
+        this.localTime = localTime;
     }
 
 
