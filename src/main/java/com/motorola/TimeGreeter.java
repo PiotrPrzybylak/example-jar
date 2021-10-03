@@ -1,14 +1,18 @@
 package com.motorola;
 
-import java.time.LocalTime;
-import java.util.function.Supplier;
+import org.springframework.stereotype.Component;
 
+import java.time.LocalTime;
+
+@Component
 public class TimeGreeter implements Greeter {
 
-    private final Supplier<LocalTime> localTime;
+    private final Clock clock;
+    private final CoinFlipper random;
 
-    public TimeGreeter(Supplier<LocalTime> localTime) {
-        this.localTime = localTime;
+    public TimeGreeter(Clock clock, CoinFlipper random) {
+        this.clock = clock;
+        this.random = random;
     }
 
     private String welcomeGuest(LocalTime time) {
@@ -20,7 +24,11 @@ public class TimeGreeter implements Greeter {
         } else if (time.getHour() == 12 && time.getMinute() == 0) {
             return "Good morning!";
         } else if (time.getHour() < 18) {
-            return "Good afternoon!";
+            if (random.isHeads()) {
+                return "Good afternoon!";
+            } else {
+                return "Hi!";
+            }
         } else {
             return "Good evening!";
         }
@@ -33,6 +41,6 @@ public class TimeGreeter implements Greeter {
     }
 
     private LocalTime getCurrentTime() {
-        return localTime.get();
+        return clock.currentTime();
     }
 }
