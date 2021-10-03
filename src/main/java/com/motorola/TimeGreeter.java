@@ -1,15 +1,14 @@
 package com.motorola;
 
 import java.time.LocalTime;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class TimeGreeter implements Greeter {
 
     private final Supplier<LocalTime> localTime;
 
-    public TimeGreeter(Supplier<LocalTime> function) {
-        this.localTime = function;
+    public TimeGreeter(Supplier<LocalTime> localTimeSupplier) {
+        this.localTime = localTimeSupplier;
     }
 
 
