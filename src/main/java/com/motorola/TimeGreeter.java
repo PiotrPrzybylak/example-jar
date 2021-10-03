@@ -43,4 +43,10 @@ public class TimeGreeter implements Greeter {
     private LocalTime getCurrentTime() {
         return clock.currentTime();
     }
+
+    public interface CoinFlipper {
+
+        boolean isHeads();
+
+    }
 }
